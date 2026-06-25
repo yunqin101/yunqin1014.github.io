@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>喵屿 · 治愈系猫咖</title>
+  <!-- 引入 Google Font 增加可爱气息 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 图标库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Quicksand', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background-color: #fef9e7;
+      color: #4a3b2f;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 柔和温暖的色调 */
+    :root {
+      --cream: #fff5e6;
+      --peach: #fce4d6;
+      --soft-brown: #b08968;
+      --dark-brown: #5e3e2b;
+      --cat-pink: #f7a8b8;
+      --mint: #c3e0d5;
+      --light-yellow: #fef3c7;
+    }
+
+    /* 导航栏 */
+    header {
+      background: rgba(255, 245, 235, 0.9);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid #f7d9c4;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #5e3e2b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo i {
+      color: #f7a8b8;
+      font-size: 2.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+      flex-wrap: wrap;
+      font-weight: 600;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #7f5b46;
+      transition: all 0.2s ease;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .nav-links a:hover {
+      color: #d9726b;
+      transform: translateY(-2px);
+    }
+
+    /* 英雄区域 */
+    .hero {
+      background: linear-gradient(135deg, #fce4d6 0%, #fef3c7 100%);
+      border-radius: 60px 60px 40px 40px;
+      margin: 25px auto 30px;
+      max-width: 1200px;
+      padding: 50px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      box-shadow: 0 20px 35px rgba(224, 187, 155, 0.3);
+    }
+
+    .hero-text {
+      flex: 1 1 300px;
+    }
+    .hero-text h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: #5e3e2b;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+    .hero-text .highlight {
+      color: #e07c6e;
+      background: #fff2e6;
+      padding: 0 10px;
+      border-radius: 30px;
+      display: inline-block;
+    }
+    .hero-text p {
+      font-size: 1.2rem;
+      margin: 20px 0 25px;
+      color: #6b4f3c;
+    }
+    .btn {
+      background: #e6a28c;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: white;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.2s;
+      box-shadow: 0 8px 18px rgba(230, 162, 140, 0.4);
+      text-decoration: none;
+    }
+    .btn:hover {
+      background: #d68b74;
+      transform: scale(1.03);
+      box-shadow: 0 12px 22px rgba(210, 120, 90, 0.4);
+    }
+
+    .hero-image {
+      flex: 1 1 300px;
+      text-align: center;
+    }
+    .hero-image i {
+      font-size: 10rem;
+      color: #f7a8b8;
+      filter: drop-shadow(0 20px 20px rgba(0,0,0,0.15));
+    }
+
+    /* 通用标题 */
+    .section-title {
+      text-align: center;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #5e3e2b;
+      margin: 50px 0 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .section-title i {
+      color: #f7a8b8;
+      font-size: 2.2rem;
+    }
+
+    /* 猫咪卡片网格 */
+    .cats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      margin: 30px 0 40px;
+    }
+
+    .cat-card {
+      background: white;
+      border-radius: 35px;
+      padding: 25px 18px 20px;
+      text-align: center;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.05);
+      transition: all 0.25s;
+      border: 2px solid #fbe9e1;
+    }
+    .cat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 35px rgba(210, 150, 120, 0.25);
+      border-color: #f7c5b0;
+    }
+    .cat-avatar {
+      font-size: 4.5rem;
+      margin-bottom: 12px;
+      color: #b08968;
+    }
+    .cat-card h3 {
+      font-size: 1.6rem;
+      color: #5e3e2b;
+      margin: 8px 0;
+    }
+    .cat-card .breed {
+      color: #b08968;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+    .cat-card p {
+      font-size: 0.95rem;
+      color: #5e4a38;
+    }
+    .mood {
+      margin-top: 12px;
+      background: #fef0e6;
+      border-radius: 20px;
+      padding: 6px 15px;
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #b95c4a;
+    }
+
+    /* 菜单区域 */
+    .menu-section {
+      background: #fff7ed;
+      border-radius: 60px;
+      padding: 40px 30px;
+      margin: 40px 0;
+    }
+    .menu-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+    }
+    .menu-item {
+      background: white;
+      border-radius: 30px;
+      padding: 20px 25px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex: 1 1 280px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+      border: 1px solid #fae1cf;
+    }
+    .menu-item i {
+      font-size: 2.7rem;
+      color: #e6a28c;
+      background: #fff0e7;
+      padding: 12px;
+      border-radius: 20px;
+    }
+    .menu-info h4 {
+      font-size: 1.3rem;
+      color: #5e3e2b;
+    }
+    .menu-info .price {
+      font-weight: 700;
+      color: #b08968;
+      margin-top: 5px;
+    }
+
+    /* 预约/信息卡片 */
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin: 30px 0 40px;
+    }
+    .info-card {
+      flex: 1 1 250px;
+      background: #ffffff;
+      border-radius: 35px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+      border: 2px dashed #f7d9c4;
+    }
+    .info-card i {
+      font-size: 2.8rem;
+      color: #e6a28c;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      background: #fae6d9;
+      border-radius: 50px 50px 0 0;
+      padding: 40px 30px 25px;
+      margin-top: 50px;
+      text-align: center;
+      color: #5e3e2b;
+    }
+    .social i {
+      font-size: 1.8rem;
+      margin: 0 12px;
+      color: #b08968;
+      transition: 0.2s;
+    }
+    .social i:hover {
+      color: #e07c6e;
+      transform: scale(1.15);
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        border-radius: 40px;
+      }
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <i class="fas fa-cat"></i> 喵屿
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home"><i class="fas fa-home"></i> 首页</a></li>
+        <li><a href="#cats"><i class="fas fa-paw"></i> 猫咪</a></li>
+        <li><a href="#menu"><i class="fas fa-mug-hot"></i> 菜单</a></li>
+        <li><a href="#visit"><i class="fas fa-calendar-alt"></i> 到店</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- 英雄区 -->
+    <section id="home" class="hero">
+      <div class="hero-text">
+        <h1>被毛茸茸<span class="highlight">治愈</span>的午后</h1>
+        <p>☕ 精品咖啡 · 12只亲人猫咪 · 阳光玻璃房</p>
+        <a href="#visit" class="btn"><i class="fas fa-paw"></i> 立即预约</a>
+      </div>
+      <div class="hero-image">
+        <i class="fas fa-cat"></i>
+      </div>
+    </section>
+
+    <!-- 明星猫咪 -->
+    <section id="cats">
+      <div class="section-title">
+        <i class="fas fa-heart"></i> 我们的毛孩子
+      </div>
+      <div class="cats-grid">
+        <div class="cat-card">
+          <div class="cat-avatar"><i class="fas fa-cat"></i></div>
+          <h3>奶盖</h3>
+          <div class="breed">英短蓝猫</div>
+          <p>贪吃爱撒娇，喜欢趴在键盘上。</p>
+          <span class="mood"><i class="fas fa-smile"></i> 今日心情：求投喂</span>
+        </div>
+        <div class="cat-card">
+          <div class="cat-avatar"><i class="fas fa-cat"></i></div>
+          <h3>芝麻</h3>
+          <div class="breed">暹罗猫</div>
+          <p>话痨小王子，随时和你聊天。</p>
+          <span class="mood"><i class="fas fa-comment"></i> 今日心情：喵喵叫</span>
+        </div>
+        <div class="cat-card">
+          <div class="cat-avatar"><i class="fas fa-cat"></i></div>
+          <h3>团团</h3>
+          <div class="breed">橘猫</div>
+          <p>十只橘猫九个胖，还有一个特别胖。</p>
+          <span class="mood"><i class="fas fa-bed"></i> 今日心情：睡不醒</span>
+        </div>
+        <div class="cat-card">
+          <div class="cat-avatar"><i class="fas fa-cat"></i></div>
+          <h3>琥珀</h3>
+          <div class="breed">布偶猫</div>
+          <p>仙女猫，蓝眼睛温柔似水。</p>
+          <span class="mood"><i class="fas fa-feather"></i> 今日心情：优雅</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 饮品菜单 -->
+    <section id="menu" class="menu-section">
+      <div class="section-title">
+        <i class="fas fa-mug-hot"></i> 猫爪推荐菜单
+      </div>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <i class="fas fa-coffee"></i>
+          <div class="menu-info">
+            <h4>猫爪拿铁</h4>
+            <p>绵密奶泡·可爱猫爪拉花</p>
+            <span class="price">¥32</span>
+          </div>
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-ice-cream"></i>
+          <div class="menu-info">
+            <h4>肉球松饼</h4>
+            <p>草莓奶油·松软香甜</p>
+            <span class="price">¥38</span>
+          </div>
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-glass-whiskey"></i>
+          <div class="menu-info">
+            <h4>柚见猫咪</h4>
+            <p>蜂蜜柚子茶·清爽解腻</p>
+            <span class="price">¥28</span>
+          </div>
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-cake"></i>
+          <div class="menu-info">
+            <h4>提拉米苏</h4>
+            <p>经典意式·可可粉满满</p>
+            <span class="price">¥35</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 到店信息 / 预约 -->
+    <section id="visit">
+      <div class="section-title">
+        <i class="fas fa-map-pin"></i> 来撸猫吧
+      </div>
+      <div class="info-row">
+        <div class="info-card">
+          <i class="fas fa-clock"></i>
+          <h3>营业时间</h3>
+          <p>周一至周五 11:00 - 20:00</p>
+          <p>周末 10:00 - 21:00</p>
+          <p style="font-size:0.9rem; margin-top:8px;">周三店休（猫咪spa日）</p>
+        </div>
+        <div class="info-card">
+          <i class="fas fa-map-marker-alt"></i>
+          <h3>猫屿地址</h3>
+          <p>上海市徐汇区</p>
+          <p>安福路78弄 喵屿小院</p>
+          <p style="font-size:0.85rem; color:#b08968;">近地铁1号线 常熟路站</p>
+        </div>
+        <div class="info-card">
+          <i class="fas fa-phone-alt"></i>
+          <h3>预约&规则</h3>
+          <p>📞 (021) 5678-1234</p>
+          <p>🧴 入店请消毒双手</p>
+          <p>🚫 请勿投喂外带食物</p>
+        </div>
+      </div>
+      <div style="text-align: center; margin: 30px 0 20px;">
+        <a href="#" class="btn"><i class="fas fa-calendar-check"></i> 线上预约时段</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="social">
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-weixin"></i>
+      <i class="fab fa-tiktok"></i>
+      <i class="fas fa-envelope"></i>
+    </div>
+    <p style="margin-top: 18px; font-weight: 600;">🐾 喵屿 · 用一杯咖啡的时间被治愈</p>
+    <p style="font-size: 0.9rem; color: #7f5b46;">© 2025 喵屿猫咪咖啡 | 所有猫咪均已疫苗驱虫</p>
+  </footer>
+</body>
+</html>
